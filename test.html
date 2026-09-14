@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kiểm thử hàng loạt · SVG → Vector Drawable</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div>
+        <h1>Kiểm thử hàng loạt</h1>
+        <p>Chuyển đổi nhiều SVG và so sánh điểm ảnh giữa SVG gốc và Vector Drawable</p>
+      </div>
+    </div>
+    <nav class="top-actions"><a class="link" href="index.html">← Trang chuyển đổi</a></nav>
+  </header>
+  <main class="app">
+    <section class="toolbar">
+      <div class="group">
+        <button id="runSamples" class="btn primary" type="button">Chạy các mẫu có sẵn</button>
+        <label class="btn" for="files">Chọn nhiều file SVG…</label>
+        <input type="file" id="files" accept=".svg,image/svg+xml" multiple hidden>
+      </div>
+      <span class="summary" id="summary"></span>
+    </section>
+    <p class="drop-hint">Hoặc kéo thả nhiều file .svg vào trang. Cột “Khác biệt” tô đỏ các điểm ảnh không khớp.</p>
+    <div class="table-wrap">
+      <table class="results">
+        <thead>
+          <tr><th>Tên</th><th>SVG gốc</th><th>Vector</th><th>Khác biệt</th><th>Khớp</th><th>Lưu ý</th><th></th></tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="js/geometry.js"></script>
+  <script src="js/color.js"></script>
+  <script src="js/converter.js"></script>
+  <script src="js/vdrender.js"></script>
+  <script src="js/compare.js"></script>
+  <script src="js/samples.js"></script>
+  <script src="js/testrunner.js"></script>
+</body>
+</html>
