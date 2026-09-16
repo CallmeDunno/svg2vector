@@ -187,11 +187,11 @@ html, body {
 
 .stage {
   position: relative;
-  height: 380px;
+  height: 253px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  padding: 16px;
 }
 .stage img, .stage canvas { width: 100%; height: 100%; object-fit: contain; display: block; }
 .stage canvas { image-rendering: pixelated; }
@@ -222,7 +222,7 @@ html, body {
 .empty.error { color: var(--danger); font-weight: 500; }
 
 .code-panel { height: 540px; }
-@media (max-width: 960px) { .code-panel { height: 420px; } .stage { height: 300px; } }
+@media (max-width: 960px) { .code-panel { height: 420px; } .stage { height: 200px; } }
 
 #svgInput, .code {
   flex: 1;

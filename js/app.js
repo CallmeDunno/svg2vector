@@ -23,6 +23,7 @@
     xmlCode: $('xmlCode'),
     xmlMeta: $('xmlMeta'),
     copy: $('btnCopy'),
+    copyHeader: $('btnCopyHeader'),
     download: $('btnDownload'),
     warnings: $('warnings'),
     bgSeg: $('bgSeg'),
@@ -140,7 +141,7 @@
     els.match.hidden = true;
     els.xmlCode.textContent = '';
     els.warnings.hidden = true;
-    els.copy.disabled = els.download.disabled = true;
+    els.copy.disabled = els.copyHeader.disabled = els.download.disabled = true;
   }
 
   function showError(message) {
@@ -155,7 +156,7 @@
     els.warnings.hidden = false;
     els.warnings.className = 'warnings error';
     els.warnings.textContent = message;
-    els.copy.disabled = els.download.disabled = true;
+    els.copy.disabled = els.copyHeader.disabled = els.download.disabled = true;
   }
 
   function renderWarnings(list) {
@@ -222,7 +223,7 @@
       `${fmtNum(res.width)}×${fmtNum(res.height)} dp · ${res.stats.paths} path · ${formatBytes(new Blob([res.xml]).size)} · ${Math.max(1, Math.round(ms))} ms`;
     els.xmlCode.innerHTML = highlightXml(res.xml);
     renderWarnings(res.warnings);
-    els.copy.disabled = els.download.disabled = false;
+    els.copy.disabled = els.copyHeader.disabled = els.download.disabled = false;
 
     let vd;
     try {
@@ -366,6 +367,13 @@
   }
   els.width.addEventListener('input', runDebounced);
   els.height.addEventListener('input', runDebounced);
+
+  const XML_HEADER = '<?xml version="1.0" encoding="utf-8"?>\n';
+  els.copyHeader.addEventListener('click', async () => {
+    if (!state.result || !state.result.xml) return;
+    const ok = await copyText(XML_HEADER + state.result.xml);
+    toast(ok ? 'Đã sao chép mã Vector Drawable kèm <?xml?>' : 'Không sao chép được', ok ? '' : 'error');
+  });
 
   els.copy.addEventListener('click', async () => {
     if (!state.result || !state.result.xml) return;
