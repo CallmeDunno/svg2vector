@@ -78,7 +78,6 @@ html, body {
   margin-bottom: 14px;
 }
 .toolbar .group { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-.options label { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); font-size: 13px; }
 
 .grid {
   display: grid;
@@ -111,7 +110,7 @@ html, body {
   transition: border-color .15s, background-color .15s, filter .15s;
 }
 .btn:hover { border-color: var(--accent); }
-.btn:focus-visible, .select:focus-visible, .num:focus-visible, .seg button:focus-visible {
+.btn:focus-visible, .seg button:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 1px;
 }
@@ -120,17 +119,6 @@ html, body {
 .btn.primary:hover { filter: brightness(1.07); }
 .btn.ghost { background: transparent; }
 .btn:disabled { opacity: .5; cursor: not-allowed; filter: none; }
-
-.select, .num {
-  height: 34px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--panel);
-  color: var(--text);
-  font: inherit;
-  padding: 0 8px;
-}
-.num { width: 84px; }
 
 .seg { display: inline-flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
 .seg button {

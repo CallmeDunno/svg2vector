@@ -8,7 +8,6 @@ A website that converts SVG into Android VectorDrawable XML (`res/drawable/*.xml
 - **SVG preview** and **Vector preview**. The Vector preview is rendered back from the generated XML using Android semantics.
 - **Automatic pixel comparison** between the original SVG and the Vector ("Khớp xx%" badge). Tick "So sánh khác biệt" to highlight mismatched pixels in red.
 - **Vector code display** with syntax highlighting, **copy to clipboard** and **download as `.xml`**.
-- Options: coordinate precision (number of decimals) and output size in dp.
 
 ## Running it
 

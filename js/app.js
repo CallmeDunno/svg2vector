@@ -8,9 +8,6 @@
     paste: $('btnPaste'),
     file: $('fileInput'),
     clear: $('btnClear'),
-    precision: $('optPrecision'),
-    width: $('optWidth'),
-    height: $('optHeight'),
     svgImg: $('svgImg'),
     svgEmpty: $('svgEmpty'),
     svgMeta: $('svgMeta'),
@@ -191,11 +188,7 @@
       return;
     }
 
-    const res = S2V.convert(text, {
-      precision: els.precision.value,
-      width: els.width.value,
-      height: els.height.value,
-    });
+    const res = S2V.convert(text);
     state.result = res;
 
     if (res.previewSvg) {
@@ -352,14 +345,6 @@
     run();
     els.input.focus();
   });
-  for (const el of [els.precision, els.width, els.height]) {
-    el.addEventListener('change', () => {
-      store.set('precision', els.precision.value);
-      run();
-    });
-  }
-  els.width.addEventListener('input', runDebounced);
-  els.height.addEventListener('input', runDebounced);
 
   const XML_HEADER = '<?xml version="1.0" encoding="utf-8"?>\n';
   els.copyHeader.addEventListener('click', async () => {
@@ -452,8 +437,7 @@
   // init
   // ---------------------------------------------------------------------------
   setBg(store.get('bg', 'checker'));
-  els.precision.value = store.get('precision', 'auto');
-  if (!els.precision.value) els.precision.value = 'auto';
+  store.remove('precision');
   // Every visit starts clean: never restore SVG/vector from a previous session.
   store.remove('svg');
   store.remove('fileName');
