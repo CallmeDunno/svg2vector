@@ -171,6 +171,8 @@ html, body {
 .panel-head h2 { font-size: 13.5px; margin: 0; font-weight: 600; }
 .panel-head .meta { color: var(--muted); font-size: 12.5px; }
 .spacer { flex: 1; }
+.panel-head .actions { display: flex; flex-wrap: nowrap; gap: 6px; margin-left: auto; }
+.panel-head .actions .btn { height: 30px; padding: 0 10px; font-size: 13px; }
 
 .badge {
   font-size: 12px;

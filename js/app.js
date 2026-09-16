@@ -21,7 +21,6 @@
     diffToggle: $('diffToggle'),
     match: $('matchBadge'),
     xmlCode: $('xmlCode'),
-    xmlMeta: $('xmlMeta'),
     copy: $('btnCopy'),
     copyHeader: $('btnCopyHeader'),
     download: $('btnDownload'),
@@ -137,7 +136,6 @@
     els.vdEmpty.className = 'empty';
     els.vdEmpty.textContent = 'Kết quả Vector Drawable sẽ hiển thị ở đây';
     els.svgMeta.textContent = '';
-    els.xmlMeta.textContent = '';
     els.match.hidden = true;
     els.xmlCode.textContent = '';
     els.warnings.hidden = true;
@@ -152,7 +150,6 @@
     els.vdEmpty.textContent = message;
     els.match.hidden = true;
     els.xmlCode.textContent = '';
-    els.xmlMeta.textContent = '';
     els.warnings.hidden = false;
     els.warnings.className = 'warnings error';
     els.warnings.textContent = message;
@@ -194,13 +191,11 @@
       return;
     }
 
-    const t0 = performance.now();
     const res = S2V.convert(text, {
       precision: els.precision.value,
       width: els.width.value,
       height: els.height.value,
     });
-    const ms = performance.now() - t0;
     state.result = res;
 
     if (res.previewSvg) {
@@ -219,8 +214,6 @@
     }
 
     els.svgMeta.textContent = `${fmtNum(res.svgWidth)} × ${fmtNum(res.svgHeight)} px`;
-    els.xmlMeta.textContent =
-      `${fmtNum(res.width)}×${fmtNum(res.height)} dp · ${res.stats.paths} path · ${formatBytes(new Blob([res.xml]).size)} · ${Math.max(1, Math.round(ms))} ms`;
     els.xmlCode.innerHTML = highlightXml(res.xml);
     renderWarnings(res.warnings);
     els.copy.disabled = els.copyHeader.disabled = els.download.disabled = false;
