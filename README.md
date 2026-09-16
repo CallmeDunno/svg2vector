@@ -9,7 +9,6 @@ A website that converts SVG into Android VectorDrawable XML (`res/drawable/*.xml
 - **Automatic pixel comparison** between the original SVG and the Vector ("Khớp xx%" badge). Tick "So sánh khác biệt" to highlight mismatched pixels in red.
 - **Vector code display** with syntax highlighting, **copy to clipboard** and **download as `.xml`**.
 - Options: coordinate precision (number of decimals) and output size in dp.
-- `test.html`: **batch testing** of many SVG files (drag and drop several files) with a match score for each.
 
 ## Running it
 
@@ -58,14 +57,12 @@ Every approximation is listed in the "lưu ý" (notes) section above the output 
 
 ```
 index.html          Conversion page
-test.html           Batch testing
 css/style.css
 js/geometry.js      Affine matrices, path parsing/transforming/serializing, arcs, bbox, dashing
 js/color.js         Color parsing
 js/converter.js     SVG → VectorDrawable
 js/vdrender.js      VectorDrawable → SVG (preview, following Android semantics)
 js/compare.js       Pixel comparison
-js/samples.js       Samples
 js/app.js           UI
 serve.js            Minimal static server (node)
 ```

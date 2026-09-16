@@ -65,8 +65,6 @@ html, body {
 .brand h1 { font-size: 17px; margin: 0; letter-spacing: -.01em; }
 .brand p { margin: 0; color: var(--muted); font-size: 12.5px; }
 .logo { width: 34px; height: 34px; flex: none; }
-.link { color: var(--accent); text-decoration: none; font-weight: 500; white-space: nowrap; }
-.link:hover { text-decoration: underline; }
 
 /* ---------- layout ---------- */
 .app { max-width: 1480px; margin: 0 auto; padding: 16px 24px 32px; }
@@ -296,15 +294,3 @@ html, body {
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 .toast.error { background: var(--danger); }
 
-/* ---------- test page ---------- */
-.summary { color: var(--muted); font-size: 13px; }
-.table-wrap { overflow-x: auto; background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-.results { width: 100%; border-collapse: collapse; }
-.results th, .results td { padding: 8px 10px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: middle; font-size: 13px; }
-.results th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
-.results tr:last-child td { border-bottom: 0; }
-.thumb { width: 132px; height: 132px; padding: 6px; border-radius: 6px; }
-.thumb img, .thumb canvas { width: 100%; height: 100%; object-fit: contain; display: block; }
-.results .warn-list { margin: 0; padding-left: 16px; color: var(--warn-text); font-size: 12px; max-width: 360px; }
-.results .err { color: var(--danger); font-weight: 500; }
-.drop-hint { color: var(--muted); font-size: 13px; margin: -4px 0 12px; }

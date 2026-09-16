@@ -7,7 +7,6 @@
     input: $('svgInput'),
     paste: $('btnPaste'),
     file: $('fileInput'),
-    sample: $('sampleSelect'),
     clear: $('btnClear'),
     precision: $('optPrecision'),
     width: $('optWidth'),
@@ -40,6 +39,13 @@
         return d;
       }
     },
+    remove(k) {
+      try {
+        localStorage.removeItem('s2v:' + k);
+      } catch (e) {
+        /* storage unavailable */
+      }
+    },
     set(k, v) {
       try {
         localStorage.setItem('s2v:' + k, v);
@@ -49,7 +55,7 @@
     },
   };
 
-  const state = { result: null, token: 0, fileName: store.get('fileName', 'ic_vector') };
+  const state = { result: null, token: 0, fileName: 'ic_vector' };
 
   // ---------------------------------------------------------------------------
   // helpers
@@ -179,7 +185,6 @@
 
   function run() {
     const text = els.input.value;
-    store.set('svg', text.length < 1.5e6 ? text : '');
     els.svgSize.textContent = text.trim() ? formatBytes(new Blob([text]).size) : '';
     const token = ++state.token;
     state.diffReady = false;
@@ -259,7 +264,6 @@
     els.input.value = text;
     if (fileName) {
       state.fileName = fileName;
-      store.set('fileName', fileName);
     }
     els.input.scrollTop = 0;
     run();
@@ -363,12 +367,6 @@
   els.width.addEventListener('input', runDebounced);
   els.height.addEventListener('input', runDebounced);
 
-  els.sample.addEventListener('change', () => {
-    const s = S2V.samples.find((x) => x.id === els.sample.value);
-    if (s) setInput(s.svg, 'ic_' + s.id.replace(/-/g, '_'));
-    els.sample.value = '';
-  });
-
   els.copy.addEventListener('click', async () => {
     if (!state.result || !state.result.xml) return;
     const ok = await copyText(state.result.xml);
@@ -452,20 +450,22 @@
   // ---------------------------------------------------------------------------
   // init
   // ---------------------------------------------------------------------------
-  for (const s of S2V.samples) {
-    const o = document.createElement('option');
-    o.value = s.id;
-    o.textContent = s.name;
-    els.sample.appendChild(o);
-  }
   setBg(store.get('bg', 'checker'));
   els.precision.value = store.get('precision', 'auto');
   if (!els.precision.value) els.precision.value = 'auto';
-  const saved = store.get('svg', '');
-  if (saved && saved.trim()) {
-    els.input.value = saved;
-    run();
-  } else {
+  // Every visit starts clean: never restore SVG/vector from a previous session.
+  store.remove('svg');
+  store.remove('fileName');
+  function startFresh() {
+    state.token++;
+    state.fileName = 'ic_vector';
+    els.input.value = '';
+    els.svgSize.textContent = '';
     resetOutput();
   }
+  startFresh();
+  // Also clear when the page is restored from the back/forward cache
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) startFresh();
+  });
 })();
